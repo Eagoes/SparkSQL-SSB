@@ -1,92 +1,84 @@
-drop table if exists customer;
+CREATE DATABASE IF NOT EXISTS `ssb`;
 
-create table customer
-(
-    c_customerkey int not null,
-    c_name        varchar(50),
-    c_address     varchar(50),
-    c_city        varchar(50),
-    c_nation      varchar(50),
-    c_region      varchar(50),
-    c_phone       varchar(50),
-    c_mktsegment  varchar(50),
-    primary key (c_customerkey)
-);
+drop table if exists `ssb.customer`;
 
-drop table if exists part;
+drop table if exists `ssb.part`;
 
-create table part
-(
-    p_partkey   int not null,
-    p_name      varchar(50),
-    p_mfgr      varchar(50),
-    p_category  varchar(50),
-    p_brand     varchar(50),
-    p_colour    varchar(50),
-    p_type      varchar(50),
-    p_size      int,
-    p_container varchar(50),
-    primary key (p_partkey)
-);
+drop table if exists `ssb.supplier`;
 
-drop table if exists supplier;
+drop table if exists `ssb.date`;
 
-create table supplier
-(
-    s_suppkey int,
-    s_name    varchar(50),
-    s_address varchar(50),
-    s_city    varchar(50),
-    s_nation  varchar(50),
-    s_region  varchar(50),
-    s_phone   varchar(50),
-    primary key (s_suppkey)
-);
+drop table if exists `ssb.lineorder`;
 
-drop table if exists date;
+CREATE TABLE IF NOT EXISTS `ssb.customer`(
+  `c_customerkey` INT,
+  `c_name` STRING,
+  `c_address` STRING,
+  `c_city` STRING,
+  `c_nation` STRING,
+  `c_region` STRING,
+  `c_phone` STRING,
+  `c_mktsegment` STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|';
 
-create table date
-(
-    d_datekey          int,
-    d_date             varchar(50),
-    d_dayofweek        varchar(50),
-    d_month            varchar(50),
-    d_year             int,
-    d_yearmonthnum     int,
-    d_yearmonth        varchar(50),
-    d_daynuminweek     int,
-    d_daynuminmonth    int,
-    d_daynuminyear     int,
-    d_monthnuminyear   int,
-    d_weeknuminyear    int,
-    d_sellingseason    varchar(50),
-    d_lastdayinweekfl  int,
-    d_lastdayInmonthfl int,
-    d_holidayfl        int,
-    d_weekdayfl        int,
-    primary key (d_datekey)
-);
+CREATE TABLE `ssb.part`(
+  `p_partkey` INT,
+  `p_name` STRING,
+  `p_mfgr` STRING,
+  `p_category` STRING,
+  `p_brand` STRING,
+  `p_colour` STRING,
+  `p_type` STRING,
+  `p_size` INT,
+  `p_container` STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|';
 
-drop table if exists lineorder;
+CREATE TABLE `ssb.supplier`(
+  `s_suppkey` INT,
+  `s_name` STRING,
+  `s_address` STRING,
+  `s_city` STRING,
+  `s_nation` STRING,
+  `s_region` STRING,
+  `s_phone` STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|';
 
-create table lineorder
-(
-    lo_orderkey      int,
-    lo_linenumber    int,
-    lo_custkey       int,
-    lo_partkey       int,
-    lo_suppkey       int,
-    lo_orderdatekey  int,
-    lo_orderpriority varchar(50),
-    lo_shippriority  varchar(50),
-    lo_quantity      int,
-    lo_extendedprice decimal(4, 2),
-    lo_ordtotalprice decimal(4, 2),
-    lo_discount      decimal(4, 2),
-    lo_revenue       decimal(4, 2),
-    lo_supplycost    decimal(4, 2),
-    lo_tax           int,
-    lo_commitdatekey int,
-    lo_shipmode      varchar(50),
-    primary key (lo_orderkey)
-);
+CREATE TABLE `ssb.date`(
+  `d_datekey` INT,
+  `d_date` STRING,
+  `d_dayofweek` STRING,
+  `d_month` STRING,
+  `d_year` INT,
+  `d_yearmonthnum` INT,
+  `d_yearmonth` STRING,
+  `d_daynuminweek` INT,
+  `d_daynuminmonth` INT,
+  `d_daynuminyear` INT,
+  `d_monthnuminyear` INT,
+  `d_weeknuminyear` INT,
+  `d_sellingseason` STRING,
+  `d_lastdayinweekfl` INT,
+  `d_lastdayInmonthfl` INT,
+  `d_holidayfl` INT,
+  `d_weekdayfl` INT
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|';
+
+CREATE TABLE `ssb.lineorder`(
+  `lo_orderkey` INT,
+  `lo_linenumber` INT,
+  `lo_custkey` INT,
+  `lo_partkey` INT,
+  `lo_suppkey` INT,
+  `lo_orderdatekey` INT,
+  `lo_orderpriority` STRING,
+  `lo_shippriority` STRING,
+  `lo_quantity` INT,
+  `lo_extendedprice` DOUBLE,
+  `lo_ordtotalprice` DOUBLE,
+  `lo_discount` DOUBLE,
+  `lo_revenue` DOUBLE,
+  `lo_supplycost` DOUBLE,
+  `lo_tax` INT,
+  `lo_commitdatekey` INT,
+  `lo_shipmode` STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|';
