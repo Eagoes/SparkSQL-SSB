@@ -1,15 +1,30 @@
-package org.spark.ssb
+package org.spark.ssb;
+
+import org.spark.jdbc.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SSBQuery {
-  private String url;
-  private 
-  protected static String driver = "org.apache.hive.jdbc.HiveDriver";
+    protected String sql;
+    protected HiveConnector connector;
+    protected ResultSet resultSet;
 
-  public SSBQuery() {
-    try {
-      Class.forName(driver);
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
+    public SSBQuery() {
+        connector = HiveConnector.getInstance();
     }
-  }
+
+    public void ExecuteSQL() {
+        assert (sql != null);
+        resultSet = connector.executeSQL(sql);
+    }
+
+    public void getResult() {
+        assert (resultSet != null);
+        try {
+            ResultSetPrinter.printResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
